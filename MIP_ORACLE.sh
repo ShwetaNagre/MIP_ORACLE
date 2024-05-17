@@ -62,8 +62,8 @@ now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
-blastn -db $parameterJ/nt -num_threads 48 -query whole_region.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml
-blastn -db nt -num_threads 48 -query whole_region.txt -max_target_seqs 10 -outfmt 5 -out Resultswr.xml
+blastn -db $parameterJ/nt -num_threads 48 -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
+blastn -db $parameterJ/nt -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultswr.xml -query whole_region.txt
 echo
 now=$(date +"%T")
 echo "Current time : $now"
