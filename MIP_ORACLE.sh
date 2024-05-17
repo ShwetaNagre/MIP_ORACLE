@@ -6,7 +6,7 @@ helpFunction()
    echo "Usage: $0 -i 'KPC' -o 'KPC_final_results' -l codes/ncbi-blas -j '/DATA/databases/blast/nt'"
    echo -e "\t-i Name of the input FASTA file(There's no need to add the file extension)"
    echo -e "\t-o Name of the ouptut file(There's no need to add the file extension)"
-   echo -e "\t-l The location of the BLAST module"
+   echo -e "\t-l The name of BLAST conda environment"
    echo -e "\t-j The location of the nt BLAST database"
    exit 1 # Exit script after printing help
 }
@@ -29,10 +29,11 @@ then
    helpFunction
 fi
 
+conda_path=$(which conda | sed 's/\/conda//g')
 
 echo "input filename=$parameterI.fasta"
 echo "output filename=$parameterO.xlsx"
-echo "BLAST module path: $parameterL"
+echo "BLAST conda environment: $parameterL"
 echo "BLAST nr database path: $parameterJ"
 now=$(date +"%T")
 echo "Current time : $now"
@@ -59,9 +60,9 @@ now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
-module load $parameterL
+source $conda_path/activate $parameterL
 export BLASTDB="$parameterJ"
-blastn -db nt -num_threads 48 -query whole_region.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml
+blastn -db $parameterJ/nt -num_threads 48 -query whole_region.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml
 blastn -db nt -num_threads 48 -query whole_region.txt -max_target_seqs 10 -outfmt 5 -out Resultswr.xml
 echo
 now=$(date +"%T")
