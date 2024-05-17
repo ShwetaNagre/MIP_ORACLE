@@ -43,10 +43,10 @@ Demo-
 Standalone nucleotide BLAST with the nt database.
   
 Python 3.0 and the following python packages:
-1. Pandas
-2. BioPython
+1. pandas
+2. biopython
 3. configparser
-4. re
+4. regex
 5. xlsxwriter
 6. openpyxl
 
