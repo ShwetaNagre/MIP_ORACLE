@@ -175,4 +175,4 @@ for i in target:
 #output all MIPs possible for the FASTA file input by the user
 df=pd.DataFrame({"Def Line":pd.Series(accid2), "Main Sequence":pd.Series(mseq),"Target region":pd.Series(target),"Ligation Arm":pd.Series(arm1),"TM 1":pd.Series(temp),"GC content 1":pd.Series(gccontent),"Continuous stretch":pd.Series(stretch),"Extension Arm":pd.Series(arm2),"TM 2":pd.Series(temp1),"GC content 2":pd.Series(gccontent1),"Continuous stretch 2":pd.Series(stretch1),"Reverse Strand Target region":pd.Series(revtarget),"Ligation Arm(Rev)":pd.Series(revarm1),"TM Rev":pd.Series(temprev1),"GC content Rev":pd.Series(gccontentrev1),"Continuous stretch Rev":pd.Series(stretch1rev1),"Extension Arm Rev":pd.Series(revarm2),"TM 2 Rev":pd.Series(temprev),"GC content 2 Rev":pd.Series(gccontentrev),"Continuous stretch 2 Rev":pd.Series(stretch1rev),"Extension Start":pd.Series(extstart),"Extension End":pd.Series(extend),"Ligation Start":pd.Series(ligationstart), "Ligation End":pd.Series(ligationend),"Organism":pd.Series(organism2)})
 
-df.to_excel(fname+" MIPs.xlsx", index=False)
+df.to_excel(fname+"_MIPs.xlsx", index=False)
