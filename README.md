@@ -27,9 +27,15 @@ Demo-
 
 ![image](https://user-images.githubusercontent.com/59496870/133621729-c870017d-8ed5-4c49-afe8-32ca1b00bf01.png)
 
-4.  Run the shell script provided as so: ./MIP_ORACLE.sh -i 'Trial_File' -o 'trial_final_results' -l codes/ncbi-blas -j /DATA/databases/blast/nt
-5.  nohup can also be used: nohup ./MIP_ORACLE.sh -i 'Lactobacillus_fermentum_16S' -o 'lacto16S_final_results' -l codes/ncbi-blas -j /DATA/databases/blast/nt > lacto16S_log.out & 
-6.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
+4.  Run the shell script provided as so:
+```bash
+./MIP_ORACLE.sh -i Trial_File -o trial_final_results -l mip_oracle -j /DATA/databases/blast/nt
+```
+6.  nohup can also be used:
+```bash
+nohup ./MIP_ORACLE.sh -i Lactobacillus_fermentum_16S -o lacto16S_final_results -l mip_oracle -j /DATA/databases/blast/nt > lacto16S_log.out &
+```
+9.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
       1. The first file will contain all possible MIPs for the sequences provided.
       2. The second and third file will contain Passable MIPs(The MIPs which met user requirements as per the config file), and Eliminated MIPs(MIPs which were filtered out).
       3. The fourth file is the BLAST input containing arm1+target+arm2 sequences.
