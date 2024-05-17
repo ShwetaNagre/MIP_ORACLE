@@ -50,7 +50,7 @@ Nucleotide BLAST with the nt database.
   
 Python 3.0 and the following python packages:
 1. pandas
-2. biopython
+2. biopython=1.70
 3. configparser
 4. regex
 5. xlsxwriter
