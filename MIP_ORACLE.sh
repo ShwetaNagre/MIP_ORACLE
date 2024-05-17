@@ -3,10 +3,10 @@
 helpFunction()
 {
    echo "NOTE: The FASTA definition line should match the CARD database format. Ex.>gb|EU555534|+|0-882|ARO:3002316|KPC-6 [Klebsiella pneumoniae]"
-   echo "Usage: $0 -i 'KPC' -o 'KPC_final_results' -l codes/ncbi-blas -j '/DATA/databases/blast/nt'"
+   echo "Usage: $0 -i KPC -o KPC_final_results -l mip_oracle -j /DATA/databases/blast/nt"
    echo -e "\t-i Name of the input FASTA file(There's no need to add the file extension)"
    echo -e "\t-o Name of the ouptut file(There's no need to add the file extension)"
-   echo -e "\t-l The name of BLAST conda environment"
+   echo -e "\t-l The name of conda environment containing all the packages"
    echo -e "\t-j The location of the nt BLAST database"
    exit 1 # Exit script after printing help
 }
@@ -28,12 +28,11 @@ then
    echo "Some or all of the parameters are empty";
    helpFunction
 fi
-
-conda_path=$(which conda | sed 's/\/conda//g')
+eval "$(conda shell.bash hook)"
 
 echo "input filename=$parameterI.fasta"
 echo "output filename=$parameterO.xlsx"
-echo "BLAST conda environment: $parameterL"
+echo "Working conda environment: $parameterL"
 echo "BLAST nr database path: $parameterJ"
 now=$(date +"%T")
 echo "Current time : $now"
@@ -41,6 +40,9 @@ echo "-------------------------------------"
 echo "MIP ORACLE"
 echo "-------------------------------------"
 # Begin script in case all parameters are correct
+
+conda activate $parameterL
+
 python MIP_1.py $parameterI
 echo
 echo
@@ -60,8 +62,6 @@ now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
-source $conda_path/activate $parameterL
-export BLASTDB="$parameterJ"
 blastn -db $parameterJ/nt -num_threads 48 -query whole_region.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml
 blastn -db nt -num_threads 48 -query whole_region.txt -max_target_seqs 10 -outfmt 5 -out Resultswr.xml
 echo
