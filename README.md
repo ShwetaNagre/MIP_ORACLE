@@ -40,7 +40,7 @@ Demo-
 
 
 # Requirements
-Standalone nucleotide BLAST with the nt database.
+Nucleotide BLAST with the nt database.
   
 Python 3.0 and the following python packages:
 1. pandas
@@ -49,6 +49,12 @@ Python 3.0 and the following python packages:
 4. regex
 5. xlsxwriter
 6. openpyxl
+
+Users can install the required packages through conda using the following command
+
+```bash
+conda create -n mip_oracle --file mip_oracle_env.txt
+```
 
 # Design
 ![flowchart](https://github.com/SakshiPandey97/MIP_ORACLE/assets/59496870/a9fbe16b-1f08-4d64-afd3-7ea3934e036e)
