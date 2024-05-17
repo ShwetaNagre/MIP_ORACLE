@@ -12,6 +12,7 @@ import os
 import sys
 import configparser
 fname = sys.argv[1]
+
 #read in the length of the target region and the length of the extension and ligation arms
 config = configparser.ConfigParser()
 config.read_file(open(r'config.txt'))
@@ -75,29 +76,59 @@ temp1=[]
 gccontent1=[]
 stretch=[]
 stretch1=[]
+
+# v4 region is  576-682 numbering based on the E. coli system of nomenclature (Brosius et al., 1978) 
+
 target=[]
 mseq=[]
+revarm1=[]
+revarm2=[]
+revtarget=[]
 accid2=[]
 organism2=[]
+extstart=[]
+extend=[]
+ligationstart=[]
+ligationend=[]
 
-#generate arms
+#generate arms for both the forward and reverse strand
 for s in seqs:
     indi=seqs.index(s)
     seqmain=s
     acid=accid[indi]
     org2=organism[indi]
-    out =[s[i: j] for i in range(len(s)) for j in range(i + 1, len(s) + 1) if len(s[i:j]) == alllen]
+    out =[]
+    for i in range(len(s)):
+        for j in range(i + 1, len(s) + 1):
+           if (len(s[i:j]) == alllen): 
+                out.append(s[i:j])
+                extstart.append(i)
+                extend.append(i+int(armlengthel))
+                ligationstart.append(j-int(armlengthel))
+                ligationend.append(j)
     lenarm=int(armlengthel)
     for g in out:
+        #EDIT HERE
         organism2.append(org2)
         accid2.append(acid)
         mseq.append(seqmain)
         a1=Seq(g[:lenarm])
         a2=Seq(g[-lenarm:])
-        arm1.append(a1)
-        arm2.append(a2)
+        #EDIT HERE
+        arm1.append(a1.complement())
+        arm2.append(a2.reverse_complement())
         target.append(g[lenarm:-lenarm])
+        srev2=a2.complement()
+        revarm1.append(a1)
+        revarm2.append(srev2.reverse_complement())
         
+temprev=[]
+gccontentrev=[]
+stretch1rev=[]
+temprev1=[]
+gccontentrev1=[]
+stretch1rev1=[]
+
 #get temperature, gc content, and check for polyNs
 for a in arm1:
     myseq = a
@@ -118,8 +149,30 @@ for b in arm2:
         stretch1.append('yes')
     else:
         stretch1.append('no')
+for c in revarm1:    
+    myseq = c
+    temprev1.append('%0.2f' % mt.Tm_NN(myseq, nn_table=mt.DNA_NN2))
+    gccontentrev1.append(GC(myseq))
+    c=str(c)
+    if re.search(r"G{rep,}", c) or re.search(r"A{rep,}", c) or re.search(r"C{rep,}", c) or re.search(r"T{rep,}", c):
+        stretch1rev1.append('yes')
+    else:
+        stretch1rev1.append('no')
+
+for d in revarm2:
+    myseq = d
+    
+    temprev.append('%0.2f' % mt.Tm_NN(myseq, nn_table=mt.DNA_NN2))
+    gccontentrev.append(GC(myseq))
+    d=str(d)
+    if re.search(r"G{rep,}", d) or re.search(r"A{rep,}", d) or re.search(r"C{rep,}", d) or re.search(r"T{rep,}", d):
+        stretch1rev.append('yes')
+    else:
+        stretch1rev.append('no')
+for i in target:
+    revtarget.append(Seq(i).complement())
 
 #output all MIPs possible for the FASTA file input by the user
-df=pd.DataFrame({"Def Line":pd.Series(accid2), "Main Sequence":pd.Series(mseq),"Target region":pd.Series(target),"Extension Arm":pd.Series(arm1),"TM 1":pd.Series(temp),"GC content 1":pd.Series(gccontent),"Continuous stretch":pd.Series(stretch),"Ligation Arm":pd.Series(arm2),"TM 2":pd.Series(temp1),"GC content 2":pd.Series(gccontent1),"Continuous stretch 2":pd.Series(stretch1),"Organism":pd.Series(organism2)})
+df=pd.DataFrame({"Def Line":pd.Series(accid2), "Main Sequence":pd.Series(mseq),"Target region":pd.Series(target),"Ligation Arm":pd.Series(arm1),"TM 1":pd.Series(temp),"GC content 1":pd.Series(gccontent),"Continuous stretch":pd.Series(stretch),"Extension Arm":pd.Series(arm2),"TM 2":pd.Series(temp1),"GC content 2":pd.Series(gccontent1),"Continuous stretch 2":pd.Series(stretch1),"Reverse Strand Target region":pd.Series(revtarget),"Ligation Arm(Rev)":pd.Series(revarm1),"TM Rev":pd.Series(temprev1),"GC content Rev":pd.Series(gccontentrev1),"Continuous stretch Rev":pd.Series(stretch1rev1),"Extension Arm Rev":pd.Series(revarm2),"TM 2 Rev":pd.Series(temprev),"GC content 2 Rev":pd.Series(gccontentrev),"Continuous stretch 2 Rev":pd.Series(stretch1rev),"Extension Start":pd.Series(extstart),"Extension End":pd.Series(extend),"Ligation Start":pd.Series(ligationstart), "Ligation End":pd.Series(ligationend),"Organism":pd.Series(organism2)})
 
 df.to_excel(fname+" MIPs.xlsx", index=False)

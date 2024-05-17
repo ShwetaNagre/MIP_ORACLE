@@ -29,6 +29,7 @@ then
    helpFunction
 fi
 
+
 echo "input filename=$parameterI.fasta"
 echo "output filename=$parameterO.xlsx"
 echo "BLAST module path: $parameterL"
@@ -60,39 +61,42 @@ echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
 module load $parameterL
 export BLASTDB="$parameterJ"
-blastn -db nt -num_threads 48 -task blastn-short -query extension_arms.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman_extarm.xml
-blastn -db nt -num_threads 48 -task blastn-short -query extension_arms.txt -max_target_seqs 10 -outfmt 5 -out Resultsall_extarm.xml
+blastn -db nt -num_threads 48 -query whole_region.txt -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml
+blastn -db nt -num_threads 48 -query whole_region.txt -max_target_seqs 10 -outfmt 5 -out Resultswr.xml
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST results have been generated against the human and non-human databases."
 python MIP_4.py
+echo
+now=$(date +"%T")
+echo "Current time : $now"
+echo "__________________________________________"
+echo "The BLAST results have been parsed"
 python MIP_5.py
-python MIP_6.py
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
-echo "BLAST results against the general nt database have been parsed."
-python MIP_7.py
-python MIP_8.py
-echo
-now=$(date +"%T")
-echo "Current time : $now"
-echo "__________________________________________"
-echo "BLAST results against the nt database filtering for humans have been parsed."
-now=$(date +"%T")
-echo "Current time : $now"
-echo "__________________________________________"
-echo "The MIPs have been filtered on the basis of BLAST matches found."
+echo "The MIPs have been filtered on the basis of BLAST matches found"
 echo "The MIPs for which no human or matches for other organisms were present will be carried forward."
-python MIP_9.py $parameterO
+python MIP_6.py $parameterO
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "The final results file has been generated."
+mkdir "$parameterI _LOG_FILES"
+mv "BLAST Organism Check(Only perfect).xlsx" "$parameterI _LOG_FILES/"
+mv "BLAST Organism Check.xlsx" "$parameterI _LOG_FILES/"
+mv "Eliminated MIPs.xlsx" "$parameterI _LOG_FILES/" 
+mv "$parameterI MIPs.xlsx" "$parameterI _LOG_FILES/"
+mv "MIP parsed(NEW).xlsx" "$parameterI _LOG_FILES/"
+mv "Passable MIPs.xlsx" "$parameterI _LOG_FILES/"
+mv "Resultswr.xml" "$parameterI _LOG_FILES/"
+mv "whole_region.txt" "$parameterI _LOG_FILES/"
+mv "Resultshuman.xml" "$parameterI _LOG_FILES/"
 echo
 echo
 echo "-------------------------------------"
