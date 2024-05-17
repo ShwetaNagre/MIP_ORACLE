@@ -40,7 +40,7 @@ nohup bash MIP_ORACLE.sh -i Lactobacillus_fermentum_16S -o lacto16S_final_result
       2. The second and third file will contain Passable MIPs(The MIPs which met user requirements as per the config file), and Eliminated MIPs(MIPs which were filtered out).
       3. The fourth file is the BLAST input containing arm1+target+arm2 sequences.
       4. The fifth and sixth files are the .xml result files from BLAST.
-      5. The seventh file will contain the parsed BLAST results pertaining to each MIP, and the eigth file will have the filtered results.
+      5. The seventh file will contain the parsed BLAST results about each MIP, and the eighth file will have the filtered results.
       6. Lastly the final result file will be generated in an excel format.
 ![image](https://user-images.githubusercontent.com/59496870/132258338-4d4c583a-835c-4470-99da-da8675d42928.png)    
 
