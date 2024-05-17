@@ -46,7 +46,7 @@ nohup bash MIP_ORACLE.sh -i Lactobacillus_fermentum_16S -o lacto16S_final_result
 
 
 # Requirements
-Nucleotide BLAST with the nt database.
+Nucleotide BLAST 2.12.0 + with the nt database.
   
 Python 3.6 and the following python packages:
 1. pandas=1.1.5
