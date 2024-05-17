@@ -29,11 +29,11 @@ Demo-
 
 4.  Run the shell script provided as so:
 ```bash
-./MIP_ORACLE.sh -i Trial_File -o trial_final_results -l mip_oracle -j /DATA/databases/blast/nt
+bash MIP_ORACLE.sh -i Trial_File -o trial_final_results -l mip_oracle -j /DATA/databases/blast/nt
 ```
 6.  nohup can also be used:
 ```bash
-nohup ./MIP_ORACLE.sh -i Lactobacillus_fermentum_16S -o lacto16S_final_results -l mip_oracle -j /DATA/databases/blast/nt > lacto16S_log.out &
+nohup bash MIP_ORACLE.sh -i Lactobacillus_fermentum_16S -o lacto16S_final_results -l mip_oracle -j /DATA/databases/blast/nt > lacto16S_log.out &
 ```
 9.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
       1. The first file will contain all possible MIPs for the sequences provided.
