@@ -27,33 +27,33 @@ for s in accid:
 
 
 presentorg=[]
-cnt=1
-new=[]
+def_list = []
+
+for i in defline:
+	val = ' '.join(i.split(' ')[0:2])
+	if val:
+		def_list.append(val)
+
 #check organism against the alignment definition line
 for i in range(len(defline)):
-    aldef=defline[i]
+    aldef=def_list[i]
     org=organisms[i]
     if org in aldef:
         new.append('yes')
     else:
         new.append('no')
-    if len(new) == 10:
-        if 'no' in new:
-            for h in range(len(new)):
-                presentorg.append("Different Organism Found")
-                #print("no here")
-            
-        else:
-            for h in range(len(new)):
-                presentorg.append("Perfect Match Found") 
-                #print("else here")
-    
-    cnt+=1
-    if len(new)==10:
-        new=[]
-        cnt=0
+for h in range(len(new)):
+	if new[h]=='no':
+		presentorg.append("Different Organism Found")
+	else:
+		presentorg.append("Perfect Match Found")
+
 #Output files generated for both perfect matches found and all matches found(BLAST Organism Check)
-df["Organism Check"]=presentorg
-df.to_excel('BLAST Organism Check.xlsx', index=False)
-df = df[~df['Organism Check'].isin(['Different Organism Found'])]
-df.to_excel('BLAST Organism Check(Only perfect).xlsx', index=False)
+        
+if len(presentorg) != len(df):
+    print(f"Warning: Length of 'presentorg' ({len(presentorg)}) does not match length of DataFrame ({len(df)})")
+else:
+	df["Organism Check"]=presentorg
+	df.to_excel('BLAST Organism Check.xlsx', index=False)
+	df = df[~df['Organism Check'].isin(['Different Organism Found'])]
+	df.to_excel('BLAST Organism Check(Only perfect).xlsx', index=False)
