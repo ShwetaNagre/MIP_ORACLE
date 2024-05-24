@@ -28,7 +28,7 @@ for s in accid:
 
 presentorg=[]
 def_list = []
-
+new=[]
 for i in defline:
 	val = ' '.join(i.split(' ')[0:2])
 	if val:
