@@ -91,6 +91,7 @@ https://conda.anaconda.org/conda-forge/noarch/simplegeneric-0.8.1-py_1.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/six-1.16.0-pyh6c4a22f_0.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/wcwidth-0.1.9-pyh9f0ad1d_0.tar.bz2
 https://repo.anaconda.com/pkgs/main/linux-64/wget-1.21.4-h91b91d3_1.conda
+https://conda.anaconda.org/anaconda/noarch/xlrd-2.0.1-pyhd3eb1b0_1.tar.bz2
 https://conda.anaconda.org/conda-forge/noarch/xlsxwriter-3.1.9-pyhd8ed1ab_0.conda
 https://conda.anaconda.org/conda-forge/linux-64/certifi-2021.5.30-py36h5fab9bb_0.tar.bz2
 https://conda.anaconda.org/bioconda/linux-64/entrez-direct-21.6-he881be0_0.tar.bz2
