@@ -23,7 +23,7 @@ t2=float(t2)
 gc1=float(gc1)
 gc2=float(gc2)
 
-wrkbk = openpyxl.load_workbook(name1+" MIPs.xlsx")
+wrkbk = openpyxl.load_workbook(name1+"_MIPs.xlsx")
 sh = wrkbk.active
 
 elim=[]
