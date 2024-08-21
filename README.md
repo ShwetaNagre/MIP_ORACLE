@@ -48,7 +48,7 @@ where,
       4. The fifth and sixth files are the .xml result files from BLAST.
       5. The seventh file will contain the parsed BLAST results about each MIP, and the eighth file will have the filtered results.
       6. Lastly the final result file will be generated in an Excel format.
-![image](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/Result_files)    
+![image](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/Result_files.png)    
 
 
 # Requirements
