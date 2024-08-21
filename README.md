@@ -42,7 +42,7 @@ where,
 -j = The location of the nt BLAST database  
 -n = The location of the human-specific BLAST database  
 
-6.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
+6.  The following files will be generated(These files will be stored in a folder called LOG_FILES):
       1. The first file will contain all possible MIPs for the sequences provided.
       2. The second and third files will contain Passable MIPs(The MIPs that met user requirements as per the config file) and Eliminated MIPs(MIPs that were filtered out).
       3. The fourth file is the BLAST input containing arm1+target+arm2 sequences.
