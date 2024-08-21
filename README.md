@@ -69,4 +69,4 @@ conda create -n mip_oracle --file mip_oracle_env.txt
 ```
 
 # Design
-![flowchart](https://github.com/SakshiPandey97/MIP_ORACLE/assets/59496870/a9fbe16b-1f08-4d64-afd3-7ea3934e036e)
+![flowchart](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/Workflow.png)
