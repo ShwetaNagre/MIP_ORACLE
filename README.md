@@ -1,13 +1,13 @@
 # MIP_ORACLE: Identifies unique target regions with diagnostic significance in pathogens.
+---
 
-A software to filter and identify unique target regions with diagnostic significance in antimicrobial resistance genes, and various other pathogen genomes.
 # Table of contents
   1. Demo-Preview
   2. Requirements
   3. Workflow
 ---
 # Demo-Preview
-Molecular Inversion Probes(MIPs) are single-stranded DNA molecules containing two complementary regions that flank the target DNA. 
+MIP_ORACLE is a software to filter and identify Molecular Inversion Probes with diagnostic significance in antimicrobial resistance genes, and various other pathogen genomes. MIPs are single-stranded DNA molecules containing two complementary regions that flank the target DNA.  
 These molecules often have a Fluorophore, DNA barcode, or Molecular tag for unique identification.
 
 ![MIP_example](https://github.com/SakshiPandey97/MIP_ORACLE/assets/59496870/9d92d545-ffe3-42c6-9125-0c3271ccd35f)
@@ -52,7 +52,7 @@ where,
       6. Lastly the final result file will be generated in an Excel format.
 ![image](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/Result_files.png)    
 
-
+---
 # Requirements
 Nucleotide BLAST 2.12.0 + with the nt database.
   
@@ -79,6 +79,6 @@ blastdbcmd -db $parameterJ/nt -taxids 9606 -out human_sequences.fasta
 ### Create a new BLAST database specific to humans
 makeblastdb -in human_sequences.fasta -dbtype nucl -parse_seqids -out nt_human
 ```
-
+---
 # Workflow
 ![flowchart](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/WORKFLOW.png)
