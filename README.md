@@ -33,12 +33,12 @@ bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j 
 ```
 5.  nohup can also be used:
 ```bash
-nohup bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt > lacto16S_log.out &
+nohup bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt > AAC-nucleotide_log.out &
 ```
 where,  
 -i = Name of the input FASTA file(There's no need to add the file extension)  
 -o = Name of the ouptut file(There's no need to add the file extension)  
--l = The name of conda environment containing all the packages  
+-l = The name of the conda environment containing all the packages  
 -j = The location of the nt BLAST database  
 
 6.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
