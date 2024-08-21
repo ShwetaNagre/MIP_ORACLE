@@ -13,10 +13,10 @@ These molecules often have a Fluorophore, DNA barcode, or Molecular tag for uniq
 
 Rough Design Outline- 
 1. Start with all possible MIPs by moving along the strand one base pair at a time. 
-2. Design MIPs for both the forward and reverse strands so that we have the highest probability of binding and then proceed to filter them according to three user-specified criteria:
-   a) Temperature
-   b) GC Content
-   c) Nucleotide Repeats
+2. Design MIPs for both the forward and reverse strands so that we have the highest probability of binding and then proceed to filter them according to three user-specified criteria:  
+   a) Temperature  
+   b) GC Content  
+   c) Nucleotide Repeats  
 3. Following this, further filter the MIPs by BLASTing them against the host genome(human).
 4. To further increase the probability of the MIP binding to the correct target region BLAST them against the non-redundant nucleotides database as well. Filter out any MIPs that match other organisms.
 
@@ -35,7 +35,7 @@ bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j 
 ```bash
 nohup bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt > lacto16S_log.out &
 ```
-where,
+where,  
 -i = Name of the input FASTA file(There's no need to add the file extension)  
 -o = Name of the ouptut file(There's no need to add the file extension)  
 -l = The name of conda environment containing all the packages  
