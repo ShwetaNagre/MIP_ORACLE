@@ -68,5 +68,15 @@ Users can install the required packages through conda using the following comman
 conda create -n mip_oracle --file mip_oracle_env.txt
 ```
 
+For creating a database specific to host (human), following commands can be used
+
+```bash
+### Extract human sequences from NT DB
+blastdbcmd -db $parameterJ/nt -taxids 9606 -out human_sequences.fasta
+
+### Create a new BLAST database specific to humans
+makeblastdb -in human_sequences.fasta -dbtype nucl -parse_seqids -out nt_human
+```
+
 # Design
 ![flowchart](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/WORKFLOW.png)
