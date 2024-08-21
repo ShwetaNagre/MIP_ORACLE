@@ -1,4 +1,5 @@
-# MIP_ORACLE
+# MIP_ORACLE: Identifies unique target regions with diagnostic significance in pathogens.
+
 A software to filter and identify unique target regions with diagnostic significance in antimicrobial resistance genes, and various other pathogen genomes.
 # Table of contents
   1. Demo-Preview
