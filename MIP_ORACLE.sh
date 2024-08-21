@@ -62,12 +62,28 @@ now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
-blastn -db /nfs_master/shweta/New_MIPS/Nt_Human/nt_human -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
+### Extract human (host) sequences from NT DB
+blastdbcmd -db $parameterJ/nt -taxids 9606 -out human_sequences.fasta
+echo "Done."
+now=$(date +"%T")
+echo "Current time : $now"
+echo "__________________________________________"
+echo "Extracted human (host) sequences from NT DB."
+### Create a new BLAST database specific to humans (host)
+makeblastdb -in human_sequences.fasta -dbtype nucl -parse_seqids -out nt_human
+echo "Done."
+now=$(date +"%T")
+echo "Current time : $now"
+echo "__________________________________________"
+echo "Created BLAST database for humans (host)."
+### BLAST against the human database
+blastn -db nt_human -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST results have been generated against the human databases."
+### BLAST against the NT database
 blastn -db $parameterJ/nt -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultswr.xml -query whole_region.txt
 echo
 now=$(date +"%T")
