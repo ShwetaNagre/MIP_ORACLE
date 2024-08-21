@@ -3,7 +3,7 @@ A software to filter and identify unique target regions with diagnostic signific
 # Table of contents
   1. Demo-Preview
   2. Requirements
-  3. Design
+  3. Workflow
 ---
 # Demo-Preview
 Molecular Inversion Probes(MIPs) are single-stranded DNA molecules containing two complementary regions that flank the target DNA. 
@@ -29,17 +29,18 @@ Demo-
 
 4.  Run the shell script provided as so:
 ```bash
-bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt
+bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt/ -n /DATA/databases/blast/Nt_Human/
 ```
 5.  nohup can also be used:
 ```bash
-nohup bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt > AAC-nucleotide_log.out &
+nohup bash MIP_ORACLE.sh -i AAC-nucleotide -o AAC-nucleotide_results -l mip_oracle -j /DATA/databases/blast/nt -n /DATA/databases/blast/Nt_Human/ > AAC-nucleotide_log.out &
 ```
 where,  
 -i = Name of the input FASTA file(There's no need to add the file extension)  
 -o = Name of the ouptut file(There's no need to add the file extension)  
 -l = The name of the conda environment containing all the packages  
 -j = The location of the nt BLAST database  
+-n = The location of the human-specific BLAST database  
 
 6.  The following files will be generated(The first eight files will be in a folder called LOG_FILES):
       1. The first file will contain all possible MIPs for the sequences provided.
@@ -78,5 +79,5 @@ blastdbcmd -db $parameterJ/nt -taxids 9606 -out human_sequences.fasta
 makeblastdb -in human_sequences.fasta -dbtype nucl -parse_seqids -out nt_human
 ```
 
-# Design
+# Workflow
 ![flowchart](https://github.com/ShwetaNagre/MIP_ORACLE2/blob/main/WORKFLOW.png)
