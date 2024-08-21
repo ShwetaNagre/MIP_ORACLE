@@ -3,7 +3,7 @@
 helpFunction()
 {
    echo "NOTE: The FASTA definition line should match the CARD database format. Ex.>gb|EU555534|+|0-882|ARO:3002316|KPC-6 [Klebsiella pneumoniae]"
-   echo "Usage: $0 -i KPC -o KPC_final_results -l mip_oracle -j /DATA/databases/blast/nt -n /DATA/databases/blast/nt_human"
+   echo "Usage: $0 -i KPC -o KPC_final_results -l mip_oracle -j /DATA/databases/blast/nt/ -n /DATA/databases/blast/nt_human/"
    echo -e "\t-i Name of the input FASTA file(There's no need to add the file extension)"
    echo -e "\t-o Name of the ouptut file(There's no need to add the file extension)"
    echo -e "\t-l The name of conda environment containing all the packages"
