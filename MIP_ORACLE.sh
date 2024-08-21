@@ -63,12 +63,17 @@ echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
 blastn -db /nfs_master/shweta/New_MIPS/Nt_Human/nt_human -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
+echo
+now=$(date +"%T")
+echo "Current time : $now"
+echo "__________________________________________"
+echo "BLAST results have been generated against the human databases."
 blastn -db $parameterJ/nt -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultswr.xml -query whole_region.txt
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
-echo "BLAST results have been generated against the human and non-human databases."
+echo "BLAST results have been generated against the nt databases."
 python MIP_4.py
 echo
 now=$(date +"%T")
