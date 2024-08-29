@@ -2,11 +2,11 @@
 ---
 
 # Table of contents
-  1. Demo-Preview
+  1. Overview
   2. Requirements
   3. Workflow
 ---
-# Demo-Preview
+# Overview
 MIP_ORACLE is a software to filter and identify Molecular Inversion Probes with diagnostic significance in antimicrobial resistance genes, and various other pathogen genomes. MIPs are single-stranded DNA molecules containing two complementary regions that flank the target DNA.  
 These molecules often have a Fluorophore, DNA barcode, or Molecular tag for unique identification.
 
@@ -21,7 +21,7 @@ Rough Design Outline-
 3. Following this, further filter the MIPs by BLASTing them against the host genome(human).
 4. To further increase the probability of the MIP binding to the correct target region BLAST them against the non-redundant nucleotides database as well. Filter out any MIPs that match other organisms.
 
-Demo-
+Execution -
 1. Obtain sequences of interest in a FASTA format, make sure the organism name is present in the definition line of each sequence. 
 2. Following this download all the program files and store them in the same directory as the FASTA file.
 3. Fill out the requirements to filter MIPs in the config file provided. The MIPs within the ranges given will be accepted. ex. all MIPs with 45<temp<70 will be taken.
@@ -56,7 +56,7 @@ where,
 # Requirements
 Nucleotide BLAST 2.12.0 + with the nt database.
   
-Python 3.6 and the following python packages:
+Python 3.6 and the following Python packages:
 1. pandas=1.1.5
 2. biopython=1.70
 3. configparser
@@ -70,7 +70,7 @@ Users can install the required packages through conda using the following comman
 conda create -n mip_oracle --file mip_oracle_env.txt
 ```
 
-For creating a database specific to host (human), following commands can be used
+For creating a database specific to the host (human), the following commands can be used
 
 ```bash
 ### Extract human sequences from NT DB
