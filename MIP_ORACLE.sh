@@ -3,27 +3,29 @@
 helpFunction()
 {
    echo "NOTE: The FASTA definition line should match the CARD database format. Ex.>gb|EU555534|+|0-882|ARO:3002316|KPC-6 [Klebsiella pneumoniae]"
-   echo "Usage: $0 -i KPC -o KPC_final_results -l mip_oracle -j /DATA/databases/blast/nt"
+   echo "Usage: $0 -i KPC -o KPC_final_results -l mip_oracle -j /DATA/databases/blast/nt/ -n /DATA/databases/blast/human_db/"
    echo -e "\t-i Name of the input FASTA file(There's no need to add the file extension)"
    echo -e "\t-o Name of the ouptut file(There's no need to add the file extension)"
    echo -e "\t-l The name of conda environment containing all the packages"
    echo -e "\t-j The location of the nt BLAST database"
+   echo -e "\t-n The location of the human-specific BLAST database"
    exit 1 # Exit script after printing help
 }
 
-while getopts "i:o:l:j:" opt
+while getopts "i:o:l:j:n:" opt
 do
    case "$opt" in
       i ) parameterI="$OPTARG" ;;
       o ) parameterO="$OPTARG" ;;
       l ) parameterL="$OPTARG" ;;
       j ) parameterJ="$OPTARG" ;;
+      n ) parameterN="$OPTARG" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
-# Print helpFunction in case parameters are empty
-if [ -z "$parameterI" ] || [ -z "$parameterO" ] || [ -z "$parameterL" ] || [ -z "$parameterJ" ]
+### Print helpFunction in case parameters are empty
+if [ -z "$parameterI" ] || [ -z "$parameterO" ] || [ -z "$parameterL" ] || [ -z "$parameterJ" ] || [ -z "$parameterN" ]
 then
    echo "Some or all of the parameters are empty";
    helpFunction
@@ -34,12 +36,13 @@ echo "input filename=$parameterI.fasta"
 echo "output filename=$parameterO.xlsx"
 echo "Working conda environment: $parameterL"
 echo "BLAST nr database path: $parameterJ"
+echo "BLAST human database path: $parameterN"
 now=$(date +"%T")
 echo "Current time : $now"
 echo "-------------------------------------"
 echo "MIP ORACLE"
 echo "-------------------------------------"
-# Begin script in case all parameters are correct
+### Begin script in case all parameters are correct
 
 conda activate $parameterL
 
@@ -62,13 +65,20 @@ now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
 echo "BLAST input files have been generated, working on BLAST results now."
-blastn -db $parameterJ/nt -num_threads 48 -taxids 9606 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
+### BLAST against the human database
+blastn -db $parameterN/nt_human -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultshuman.xml -query whole_region.txt
+echo
+now=$(date +"%T")
+echo "Current time : $now"
+echo "__________________________________________"
+echo "BLAST results have been generated against the human databases."
+### BLAST against the NT database
 blastn -db $parameterJ/nt -num_threads 48 -max_target_seqs 10 -outfmt 5 -out Resultswr.xml -query whole_region.txt
 echo
 now=$(date +"%T")
 echo "Current time : $now"
 echo "__________________________________________"
-echo "BLAST results have been generated against the human and non-human databases."
+echo "BLAST results have been generated against the nt databases."
 python MIP_4.py
 echo
 now=$(date +"%T")
